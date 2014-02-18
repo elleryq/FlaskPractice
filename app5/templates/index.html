@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Guestbook</title>
+<style>
+label {
+  float: left;
+  width: 10%;
+  }
+</style>
+</head>
+<body>
+    <div id="commentArea">
+        <form method="POST" action="/">
+            <fieldset>
+            <legend>You can comment here.</legend>
+            <br/>
+            {{ form.csrf_token }}
+            <label>{{ form.author.label }}</label> {{ form.author(size=20) }}
+            <br/>
+            <label>{{ form.email.label }}</label> {{ form.email }}
+            <br/>
+            <label>{{ form.message.label }}</label> {{ form.message }}
+            <br/>
+            {{ form.submit }}
+        </form>
+    </div>
+    <ul>
+    {% for entry in entries %}
+    <li>{{ entry.author|safe }} posted on {{ entry.postedOn }} : {{ entry.message|safe }}
+    {% else %}
+    <li>No entries.</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
