@@ -1,37 +1,47 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Guestbook</title>
-<style>
-label {
-  float: left;
-  width: 10%;
-  }
-</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Guestbook</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 </head>
 <body>
-    <div id="commentArea">
-        <form method="POST" action="/">
-            <fieldset>
-            <legend>You can comment here.</legend>
-            <br/>
-            {{ form.csrf_token }}
-            <label>{{ form.author.label }}</label> {{ form.author(size=20) }}
-            <br/>
-            <label>{{ form.email.label }}</label> {{ form.email }}
-            <br/>
-            <label>{{ form.message.label }}</label> {{ form.message }}
-            <br/>
-            {{ form.submit }}
-        </form>
+    <div id="container">
+        <div class="row">
+            <div class="col-md-9">
+                <form method="POST" action="/" role="form">
+                    <fieldset>
+                        <legend>You can comment here.</legend>
+                        {{ form.csrf_token }}
+                        <div class="form-group">
+                        {{ form.author.label }} {{ form.author(size=20) }}
+                        </div>
+                        <div class="form-group">
+                        {{ form.email.label }} {{ form.email }}
+                        </div>
+                        <div class="form-group">
+                        {{ form.message.label }} {{ form.message }}
+                        </div>
+                        {{ form.submit }}
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <ul>
+                {% for entry in entries %}
+                <li>{{ entry.author|safe }} posted on {{ entry.postedOn }} : {{ entry.message|safe }}
+                {% else %}
+                <li>No entries.</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
-    <ul>
-    {% for entry in entries %}
-    <li>{{ entry.author|safe }} posted on {{ entry.postedOn }} : {{ entry.message|safe }}
-    {% else %}
-    <li>No entries.</li>
-    {% endfor %}
-    </ul>
 </body>
 </html>
