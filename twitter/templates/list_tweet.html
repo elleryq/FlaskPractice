@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+{% for tweet in tweets %}
+<div>
+{{ tweet.user.username }} tweeted on {{ tweet.tweeted_at }} : {{ tweet.text }}
+</div>
+{% else %}
+<div>
+<li>No tweets.</li>
+</div>
+{% endfor %}
+{% endblock %}
