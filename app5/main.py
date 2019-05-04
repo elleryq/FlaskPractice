@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask_wtf import Form
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from wtforms import TextField, TextAreaField, SubmitField, DateTimeField
 from wtforms.validators import DataRequired
 from datetime import datetime
